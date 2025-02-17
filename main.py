@@ -61,14 +61,14 @@ def getCharApperances(text):
 def main():
 	with open("books/frankenstein.txt") as f:
 		file_contents = f.read()
-		print(file_contents)
-		print('\n')
+		# print(file_contents)
+		# print('\n')
 		total_words = getWords(file_contents)
 		print(total_words)
 
 		print(getCharApperances(file_contents))
 
-		print('\n')
+		# print('\n')
 		getReport(getCharApperances(file_contents))
 
 main()
