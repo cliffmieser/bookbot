@@ -1,3 +1,7 @@
+import sys
+import os
+
+
 def getWords(text):
 	"""Returns the total number count of words in the book"""
 	words = text.split()
@@ -36,7 +40,7 @@ def getReport(text):
 
 	for x in charList:
 		if x["char"].isalpha():
-			print(f"The '{x["char"]}' character was found {x["count"]} times")
+			print(f"{x["char"]}: {x["count"]}")
 
 
 
@@ -47,28 +51,44 @@ def getCharApperances(text):
 	wordDict = {}
 	
 	# loop through text and add 1 if any character matches 
-	for _ in text.lower():
-		if _ not in [' ','#','.']:
-			if _ in wordDict:
-				wordDict[_] += 1
+	for char in text.lower():
+		if char.isalpha():
+			if char in wordDict:
+				wordDict[char] += 1
 			else: 
-				wordDict[_] = 1
+				wordDict[char] = 1
 		else:
 			continue
 
 	return wordDict
 
+def displayHelp(): 
+	"""Prints to command line how to use the program"""
+	print("Usages: python3 main.py <path_to_book>")
+	sys.exit(1)
+
+def getPath(): 
+	"""returns path to book (relative)"""
+	book = sys.argv[1]
+	return os.getcwd() + f"/{book}" # gets books/input.txt 
+
+
 def main():
-	with open("books/frankenstein.txt") as f:
-		file_contents = f.read()
-		# print(file_contents)
-		# print('\n')
-		total_words = getWords(file_contents)
-		print(total_words)
+	if not len(sys.argv) == 2:
+		displayHelp()
+	else:
+		# print(f"argument list: {sys.argv}")
+		path = getPath()
+		with open(path) as f:
+			file_contents = f.read().strip()
+			# print(file_contents)
+			
+			total_words = getWords(file_contents)
+			# print(total_words)
 
-		print(getCharApperances(file_contents))
+			print(getCharApperances(file_contents))
 
-		# print('\n')
-		getReport(getCharApperances(file_contents))
+			# print('\n')
+			getReport(getCharApperances(file_contents))
 
 main()
