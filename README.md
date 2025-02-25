@@ -1,6 +1,3 @@
 # bookbot
 
-my first project
-
-program for text analysis 
-
+bootdev personal project
