@@ -24,13 +24,17 @@ def getReport(text):
 	"""Return an aggregated report of characters
 	input: dictionary of characters """
 
-	print("\n--- Begin report of books/frankenstein.txt ---")
+	# get the name of file 
+	title = sys.argv[1]
+	# title = title[6:] 	Contains just the name without books/
+	print(f"\n--- Begin report of {title} ---")
 	print(f"{ sum(text.values()) } words found in the document")
 	
 	charList = [] #initialize empty list to store dictionaries 
 	
 	for k,v in text.items():
-		if k == ' ' or k == '.' or k == '#':
+		# if k == ' ' or k == '.' or k == '#':
+		if k.isalpha() != True:
 			continue
 		else: 
 			newDict = dict([("char", k), ("count", v)])
@@ -49,7 +53,7 @@ def getReport(text):
 def getCharApperances(text):
 	"""Gets text from string and shows qty that some character appeared"""
 	wordDict = {}
-	
+
 	# loop through text and add 1 if any character matches 
 	for char in text.lower():
 		if char.isalpha():
@@ -86,7 +90,7 @@ def main():
 			total_words = getWords(file_contents)
 			# print(total_words)
 
-			print(getCharApperances(file_contents))
+			# print(getCharApperances(file_contents))
 
 			# print('\n')
 			getReport(getCharApperances(file_contents))
