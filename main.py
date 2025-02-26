@@ -1,19 +1,6 @@
 import sys
 import os
-
-
-def getWords(text):
-	"""Returns the total number count of words in the book"""
-	words = text.split()
-	count = 0
-
-	for _ in words:
-		count+= 1
-	print(f"Total number of words in this book: {count}.")
-
-	return count
-
-
+from stats import get_num_words
 
 def sort_on(dict):
 	"""Used to sort the dictionary by count ASC order"""
@@ -26,7 +13,7 @@ def getReport(text):
 
 	# get the name of file 
 	title = sys.argv[1]
-	# title = title[6:] 	Contains just the name without books/
+
 	print(f"\n--- Begin report of {title} ---")
 	print(f"{ sum(text.values()) } words found in the document")
 	
@@ -87,8 +74,8 @@ def main():
 			file_contents = f.read().strip()
 			# print(file_contents)
 			
-			total_words = getWords(file_contents)
-			# print(total_words)
+			total_words = get_num_words(file_contents)
+			print(total_words)
 
 			# print(getCharApperances(file_contents))
 
